@@ -3,7 +3,7 @@ import { Switch, Router, Route } from 'react-router-dom';
 
 import history from '../history';
 import OAuth from './OAuth';
-import Authorized from './Authorized';
+import AuthorizedUser from './AuthorizedUser';
 class App extends React.Component {
     render() {
         return (
@@ -11,7 +11,7 @@ class App extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={OAuth} />
-                        <Route exact path="/authorized" component={Authorized} />
+                        <Route exact path="/authorized" component={AuthorizedUser} />
                     </Switch>
                 </div>
             </Router>

@@ -4,7 +4,7 @@ import 'firebase/auth';
 
 import { firebaseConfig } from '../firebase/config';
 import history from '../history';
-class Authorized extends React.Component{
+class AuthorizedUser extends React.Component{
     state = { name: '' };
     componentDidMount(){
         if(!localStorage.getItem("auth-token")) return history.push('/');
@@ -31,4 +31,4 @@ class Authorized extends React.Component{
     }
 }
 
-export default Authorized;
+export default AuthorizedUser;
