@@ -1,17 +1,25 @@
 import React from 'react';
 import firebase from "firebase/app";
-import { firebaseConfig } from '../firebase/cfg';
 import "firebase/auth";
 
-class IninUser extends React.Component {
+import { firebaseConfig } from '../firebase/config';
+import history from '../history';
+
+
+class OAuth extends React.Component {
+    componentDidMount(){
+        if(localStorage.getItem("auth-token")) history.push('/authorized');
+    }
+
     signInHandler = async () => {
         firebase.initializeApp(firebaseConfig);
         const provider = new firebase.auth.GithubAuthProvider();
         try {
             const { credential } = await firebase.auth().signInWithPopup(provider);
             const { accessToken } = credential;
-
             console.log(accessToken);
+            localStorage.setItem("auth-token", accessToken);
+            history.push('/authorized');
         } catch(e) {    
             console.log(e);
         }
@@ -20,11 +28,11 @@ class IninUser extends React.Component {
     render() {
         return (
             <div>
-                Init user
+                OAuth
                 <button onClick={this.signInHandler}>Sign in with GitHub</button>
             </div>
         )
     }
 }
 
-export default IninUser;
+export default OAuth;
